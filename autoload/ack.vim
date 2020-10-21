@@ -207,15 +207,21 @@ endfunction "}}}
 function! s:SearchWithGrep(grepcmd, grepprg, grepargs, grepformat) "{{{
   let l:grepprg_bak    = &l:grepprg
   let l:grepformat_bak = &grepformat
+  let l:t_ti_bak=&t_ti
+  let l:t_te_bak=&t_te
 
   try
     let &l:grepprg  = a:grepprg
     let &grepformat = a:grepformat
+    set t_ti=
+    set t_te=
 
     silent execute a:grepcmd a:grepargs
   finally
     let &l:grepprg  = l:grepprg_bak
     let &grepformat = l:grepformat_bak
+    let &t_ti=l:t_ti_bak
+    let &t_te=l:t_te_bak
   endtry
 endfunction "}}}
 
